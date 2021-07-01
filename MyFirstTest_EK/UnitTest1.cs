@@ -1,14 +1,36 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace MyFirstTest_EK
 {
-    [TestClass]
-    public class UnitTest1
+    [TestFixture]
+    public class MyFirstTest1
     {
-        [TestMethod]
-        public void TestMethod1()
+        private IWebDriver driver;
+        private WebDriverWait wait;
+
+        [SetUp]
+        public void Start()
         {
+            driver = new ChromeDriver();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
+
+        [Test]
+        public void FirstTest()
+        {
+            driver.Url = "http://www.google.com";
+        }
+
+        [TearDown]
+        public void Stop()
+        {
+            driver.Quit();
+            driver = null;
         }
     }
 }
